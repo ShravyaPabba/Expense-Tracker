@@ -30,8 +30,8 @@ class ExpensesListScreen extends StatelessWidget {
           child: ListView.builder(
             itemCount: snapshot.data!.length,
             itemBuilder: (context, index) {
-              final dog = snapshot.data![index];
-              return _buildBreedCard(dog, context);
+              final expense = snapshot.data![index];
+              return _buildExpenseCard(expense, context);
             },
           ),
         );
@@ -57,7 +57,7 @@ class ExpensesListScreen extends StatelessWidget {
     }
   }
 
-  Widget _buildBreedCard(Expense expense, BuildContext context) {
+  Widget _buildExpenseCard(Expense expense, BuildContext context) {
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(12.0),

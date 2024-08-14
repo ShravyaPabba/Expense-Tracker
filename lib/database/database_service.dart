@@ -70,7 +70,7 @@ class DatabaseService {
     return Expense.fromMap(maps[0]);
   }
 
-  Future<void> updateBreed(Expense expense) async {
+  Future<void> updateExpense(Expense expense) async {
 
     final db = await _databaseService.database;
 
