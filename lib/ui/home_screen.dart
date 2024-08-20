@@ -1,4 +1,3 @@
-import 'package:expense_tracker/models/expense.dart';
 import 'package:expense_tracker/ui/add_expense_screen.dart';
 import 'package:expense_tracker/ui/expenses_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -61,7 +60,6 @@ class MyHomePage extends StatefulWidget {
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
-
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -144,25 +142,27 @@ class _MyHomePageState extends State<MyHomePage> {
                 },
               ),
             ),
-            Wrap(
-              alignment: WrapAlignment.center,
-                children: [
-              ElevatedButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => ExpensesListScreen(),
-                    fullscreenDialog: true,
-                  ),
-                ),
-                child: Text(
-                  'All Expenses',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-              )
-            ]),
+            FutureBuilder<Map<String, double>>(
+                future: _getExpensesData(),
+                builder: (context, snapshot) {
+                  return snapshot.data!.isNotEmpty
+                      ? Wrap(alignment: WrapAlignment.center, children: [
+                          ElevatedButton(
+                            onPressed: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => ExpensesListScreen(),
+                                fullscreenDialog: true,
+                              ),
+                            ),
+                            child: Text(
+                              'All Expenses',
+                              style: TextStyle(
+                                  fontSize: 16.0, fontWeight: FontWeight.bold),
+                            ),
+                          )
+                        ])
+                      : const Wrap();
+                }),
           ],
         ),
       ),
@@ -170,13 +170,16 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: "Add Expense",
         child: Image.asset('assets/coins.png'),
         onPressed: () async {
-          bool result = await Navigator.push(context,
+          bool result = await Navigator.push(
+            context,
             MaterialPageRoute(
               builder: (_) => AddExpenseScreen(),
               fullscreenDialog: true,
             ),
           );
-          if(result){setState((){});}
+          if (result) {
+            setState(() {});
+          }
         },
       ),
     );

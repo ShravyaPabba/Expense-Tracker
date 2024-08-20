@@ -51,6 +51,18 @@ class ExpensesListScreen extends StatelessWidget {
       case "Transport": {
         return Image.asset('assets/transport.png');
       }
+      case "Bills":
+        {
+          return Image.asset('assets/bills.png');
+        }
+      case "Groceries":
+        {
+          return Image.asset('assets/groceries.png');
+        }
+      case "Medical":
+        {
+          return Image.asset('assets/medical.png');
+        }
       default: {
         return Image.asset('assets/shopping.png');
       }
